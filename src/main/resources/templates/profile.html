@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/default}">
+
+<body>
+
+	<div layout:fragment="container">
+
+		Hello, user.
+		
+		<ul>
+			<li><a th:href="@{/changePassword}">Change password</a></li>
+			<li><a th:href="@{/changeEmail}">Change e-mail</a></li>
+			<li><a th:href="@{/deleteAccount}">Delete account</a></li>
+		</ul>
+
+	</div>
+	<!-- /container -->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/default}">
+
+<body>
+
+	<div layout:fragment="container">
+
+    	<h2 th:text="#{delete.successHeader}"></h2>
+      	
+      	<div th:if="${confirmationMessage}" class="alert alert-success"
+			role="alert" th:text="${confirmationMessage}"></div>
+			
+	<a th:href="@{/register}" th:text="#{registration.header}"></a>
+
+
+  </div>
+
+  <!-- Mainly scripts -->
+  <script th:src="@{/webjars/jquery/3.1.1/dist/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

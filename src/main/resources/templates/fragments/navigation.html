@@ -1,0 +1,34 @@
+<nav id="navigation" class="navbar-dark navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+		<a class="navbar-brand" href="/auth/profile">Auth server</a>
+    </div>
+	<ul class="nav navbar-nav">
+		<li><a th:href="@{/login}" th:text="#{login.header}"></a></li>
+	    <li><a th:href="@{/register}" th:text="#{registration.header}"></a></li>
+	    <li><a th:href="@{/logout}" th:text="#{logout.header}"></a></li>
+	</ul>
+  </div>
+  
+  <div id="language">
+  		<span th:text="#{lang.change}"></span>
+		<select id="locales">
+			<option value=""></option>
+    		<option value="en">English</option>
+    		<option value="cs">Česky</option>
+		</select>
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+  </script>
+  <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#locales").change(function () { 	 	
+	        var selectedOption = $('#locales').val();
+	        if (selectedOption != ''){
+	            window.location.replace('?lang=' + selectedOption);
+	        }
+	    });
+	});
+  </script>
+</nav>

@@ -1,0 +1,103 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
+	}
+}
+
+// SonarQube
+plugins {
+	id 'org.sonarqube' version '2.5'
+}
+
+sonarqube {
+	properties {
+		property 'sonar.coverage.exclusions', '**/model/*, **/*Exception.java'
+	}
+}
+
+// Plugin section
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
+apply plugin: 'org.asciidoctor.convert'
+	
+repositories {
+	mavenCentral()
+	jcenter()
+		
+	maven {
+		url 'https://repo.spring.io/libs-milestone'
+	}
+}
+	
+jar {
+	baseName = 'auth-example'
+	version = '0.0.1-SNAPSHOT'
+}
+
+mainClassName = 'com.gigsterous.auth.AuthServer'
+	
+// Checkstyle
+checkstyle {
+	toolVersion = '8.2'
+	configFile = rootProject.file('checkstyle/checkstyle.xml')
+
+	ignoreFailures = true
+	showViolations = true
+
+	checkstyleTest.enabled = false
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled = true
+	}
+}
+
+check.dependsOn jacocoTestReport
+	
+asciidoctor {
+	sourceDir 'src/main/asciidoc'
+	attributes \
+		'snippets': file('docs/snippets')
+}
+	
+dependencies {
+	// Spring
+	compile('org.springframework.boot:spring-boot-starter-tomcat')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-mail')
+	
+	// Thymeleaf
+	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+	
+	// Tools
+	compile('org.flywaydb:flyway-core')
+	compileOnly('org.projectlombok:lombok')
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+	
+	// Local development
+	runtime('com.h2database:h2')
+	
+	// Test
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+	testCompile('org.springframework.security:spring-security-test')
+	testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.10.1'	
+}
+

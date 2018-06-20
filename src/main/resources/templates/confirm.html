@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/default}">
+
+<body>
+
+	<div id="page" layout:fragment="container">
+	
+		<div th:if="${invalidToken}" class="alert alert-danger" role="alert"
+			th:text="${invalidToken}"></div>
+
+		<form th:if="!${invalidToken}" class="form-signin" id="passwordForm"
+			role="form" action="#" th:object="${setPassword}"
+			th:action="@{/confirm}" method="post">
+			
+			<h2 class="form-signin-heading">Password setup</h2>
+
+			<div th:if="${successMessage}" class="alert alert-success"
+				role="alert" th:text="${successMessage}"></div>
+				
+			<input type="hidden" name="token" th:value="${confirmationToken}" />
+			
+			<div th:if="${successMessage}">
+				<a th:href="@{${loginLink}}" class="btn btn-lg btn-primary btn-block">Login</a>
+				<br />
+			</div>
+
+			<div th:if="${errorMessage}" class="alert alert-danger" role="alert"
+				th:text="${errorMessage}"></div>
+
+			<div th:if="!${successMessage}" class="form-group input-group">
+				<span class="input-group-addon"> <span
+					class="glyphicon glyphicon-lock"></span>
+				</span>
+				<input name="password" type="password" id="password"
+					placeholder="Password" class="form-control" required="true" /> 
+				<span class="glyphicon" aria-hidden="true"></span>
+			</div>
+
+			<div th:if="!${successMessage}" class="form-group input-group has-feedback">
+				<span class="input-group-addon"> 
+					<span class="glyphicon glyphicon-lock"></span>
+				</span> 
+				<input type="password" class="form-control"
+					id="signup-password-confirm" placeholder="Confirm Password"
+					name="confirmPassword" required="true" />
+
+				<div class="help-block with-errors"></div>
+			</div>
+
+			<button th:if="!${successMessage}" type="submit" class="btn btn-lg btn-primary btn-block">Save</button>
+
+		</form>
+
+
+	</div>
+
+	<!-- jQuery-->
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap Validator plugin -->
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+
+	<script th:src="@{js/fv.min.js}"></script>
+
+</body>
+</html>

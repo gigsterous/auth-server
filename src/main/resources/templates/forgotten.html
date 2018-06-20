@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/default}">
+
+<body>
+
+	<div layout:fragment="container">
+
+		<form autocomplete="off" action="#" th:action="@{/forgotten}"
+			th:object="${user}" method="post" class="form-signin" role="form"
+			data-toggle="validator">
+			
+			<h2 class="form-signin-heading" th:text="#{forgottenPassword.header}"></h2>
+
+			<div th:if="${confirmationMessage}" class="alert alert-success"
+				role="alert" th:text="${confirmationMessage}"></div>
+
+			<div th:if="${errorMessage}" class="alert alert-danger" role="alert"
+				th:text="${errorMessage}"></div>
+
+
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+				class="validation-message alert alert-danger" role="alert"></div>
+
+
+			<div class="form-group input-group has-feedback">
+				<span class="input-group-addon"> 
+					<span class="glyphicon glyphicon-envelope"></span>
+				</span> 
+				<input
+					type="email"
+					th:field="*{email}"
+					th:placeholder="#{forgottenPassword.emailPlaceholder}"
+					class="form-control"
+					data-error="This email address is invalid"
+					required="true"
+				/> 
+				<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+			</div>
+
+			<button type="submit" class="btn btn-lg btn-primary btn-block" th:text="#{forgottenPassword.buttonText}"></button>
+
+		</form>
+
+	</div>
+
+	<!-- jQuery-->
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap Validator plugin -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+
+</body>
+
+</html>

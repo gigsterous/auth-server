@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/default}">
+
+<body>
+
+	<div layout:fragment="container">
+
+      <form class="form-signin" role="form" th:action="@{/logout}" method="post">
+      
+      	<h2 class="form-signin-heading" th:text="#{logout.header}"></h2>
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block" th:text="#{logout.buttonText}"></button>
+      </form>
+      
+      <form class="form-signin" role="form" th:action="@{/globalLogout}" method="post">
+      
+      	<h2 class="form-signin-heading" th:text="#{logout.globalHeader}"></h2>
+      	
+      	<div th:if="${confirmationMessage}" class="alert alert-success"
+				role="alert" th:text="${confirmationMessage}"></div>
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block" th:text="#{logout.buttonText}"></button>
+      </form>
+
+
+  </div>
+
+  <!-- Mainly scripts -->
+  <script th:src="@{/webjars/jquery/3.1.1/dist/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

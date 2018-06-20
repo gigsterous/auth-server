@@ -1,0 +1,19 @@
+= Api-auth REST Docs
+
+These are example requests made against api-auth service.
+
+Sending authorized request to /user endpoint:
+
+.request
+include::{snippets}/user-authorized/http-request.adoc[]
+
+.response
+include::{snippets}/user-authorized/http-response.adoc[]
+
+Admin is also able to retrieve the list of all users in the system:
+
+.request
+include::{snippets}/users-all/http-request.adoc[]
+
+.response
+include::{snippets}/users-all/http-response.adoc[]
