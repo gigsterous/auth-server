@@ -4,7 +4,7 @@ This is an example authorization server written in Spring Boot 2. It is not mean
 
 This auth server could be extended to provide other resources and act as an resource server or it can be used with an existing resource server and only provide  authentication/authorization by managing user OAuth2 tokens.
 
-If you like this application and have questions or feature requests, feel free to contuct me at `m.myslik@gmail.com` or open an issue/PR.
+If you like this application and have questions or feature requests, feel free to open an issue/PR.
 
 ## 🌟 Features
 
@@ -143,3 +143,7 @@ There are numerous reasons for Refresh Token to be invalidated. When that happen
 ```
 
 When this error occurs, user credentials have to be used in order to authenticate the user again.
+
+## 🔖 License
+
+The code is released under the Apache 2.0 license. See [LICENSE](https://github.com/gigsterous/auth-server/blob/master/LICENSE) for details.
